@@ -23,6 +23,8 @@ docker compose up --build
 
 ### Claude Desktop / Claude Code
 
+If your client supports `streamable-http` natively:
+
 ```json
 {
   "mcpServers": {
@@ -32,6 +34,28 @@ docker compose up --build
       "headers": {
         "Authorization": "Bearer your-secret-api-key-here"
       }
+    }
+  }
+}
+```
+
+### Using supergateway (stdio bridge)
+
+If your client only supports stdio transport (e.g. some Claude Desktop versions), use [supergateway](https://github.com/nicholasgriffintn/supergateway) to bridge the connection:
+
+```json
+{
+  "mcpServers": {
+    "odoo": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "supergateway",
+        "--streamableHttp",
+        "http://your-server:8000/mcp",
+        "--header",
+        "Authorization: Bearer your-secret-api-key-here"
+      ]
     }
   }
 }
