@@ -1,0 +1,49 @@
+[project]
+name = "odoo-mcp-server-remote"
+version = "0.1.0"
+description = "Remote MCP server for Odoo ERP - enables AI assistants to interact with Odoo over HTTP"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+keywords = ["mcp", "odoo", "erp", "ai", "remote", "http"]
+
+dependencies = [
+    "mcp[cli]>=1.8.0",
+    "python-dotenv>=1.0.0",
+    "pydantic>=2.0.0",
+    "httpx>=0.27.0",
+    "odooly>=2.0.0,<2.2",
+    "uvicorn>=0.30.0",
+    "starlette>=0.38.0",
+]
+
+[project.scripts]
+odoo-mcp-remote = "odoo_mcp_remote.__main__:main"
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-asyncio>=0.21.0",
+    "pytest-cov>=4.0.0",
+    "ruff>=0.1.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+asyncio_mode = "auto"
+
+[tool.ruff]
+target-version = "py310"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "UP", "B", "SIM"]
+ignore = ["E501"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["odoo_mcp_remote"]
