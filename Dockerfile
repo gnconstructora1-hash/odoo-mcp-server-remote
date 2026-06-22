@@ -6,6 +6,7 @@ COPY pyproject.toml .
 COPY README.md .
 COPY odoo_mcp_remote/ odoo_mcp_remote/
 
+ARG CACHEBUST=20260622_v2
 RUN pip install --no-cache-dir "mcp[cli]>=1.9.0,<1.10" && pip install --no-cache-dir .
 
 EXPOSE 8000
