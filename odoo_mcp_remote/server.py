@@ -7,7 +7,6 @@ from typing import Any
 
 from dotenv import load_dotenv
 from mcp.server.fastmcp import FastMCP
-from mcp.server.transport_security import TransportSecuritySettings
 from pydantic import ValidationError
 
 from .odoo_client import OdooClient, OdooConfig
@@ -19,10 +18,7 @@ mcp = FastMCP(
     stateless_http=True,
     json_response=True,
     host="0.0.0.0",
-    transport_security=TransportSecuritySettings(
-        enable_dns_rebinding_protection=False,
-    ),
-)
+)    
 
 _odoo_client: OdooClient | None = None
 
